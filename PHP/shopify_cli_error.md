@@ -1,4 +1,4 @@
-## shopify cli econnreset error
+## shopify cli econnreset error <!-- {docsify-ignore} -->
 
 最近在学习shopify的项目，在使用终端搭建环境时运行shopify theme dev 后报错，出现 ``` econnreset; shopify client network socket disconnected before secure tls connection was established ``` 等网络错误。
 
