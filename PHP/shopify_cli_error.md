@@ -11,3 +11,7 @@ Windows的系统需要使用支持tun模式的代理软件
 关于tun模式貌似就是开启一块儿虚拟网卡，所有流量都要走这个网卡代理；这样就避免了一些不听话的软件不走代理的情况。
 
 解决该问题还有另外一种方式就是在路由器上做代理。
+
+> 最新 通过修改shopify-cli代码增加代理的方式 https://github.com/Shopify/cli/issues/3225#issuecomment-1882928400
+
+期望后期shopify官方能加入proxy参数的形式让开发者自定义
