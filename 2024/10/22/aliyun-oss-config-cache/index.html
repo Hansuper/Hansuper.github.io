@@ -19,21 +19,34 @@
   <meta name="author" content="Harrod">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="https://hansuperxu.github.io/archives/2024/index.html">
+    <meta name="description" content="最近在做一些优化的时候，发现浏览器每次都重新请求静态资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="让浏览器缓存静态资源">
+<meta property="og:url" content="https://hansuperxu.github.io/2024/10/22/aliyun-oss-config-cache/index.html">
 <meta property="og:site_name" content="浮沉">
+<meta property="og:description" content="最近在做一些优化的时候，发现浏览器每次都重新请求静态资源">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hansuperxu.github.io/img/cache.png">
+<meta property="og:image" content="https://hansuperxu.github.io/img/dev-tool.png">
+<meta property="article:published_time" content="2024-10-22T01:48:39.000Z">
+<meta property="article:modified_time" content="2024-10-22T03:13:44.262Z">
 <meta property="article:author" content="Harrod">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hansuperxu.github.io/img/cache.png">
   
   
   
-  <title>归档 - 浮沉</title>
+  <title>让浏览器缓存静态资源 - 浮沉</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -83,7 +96,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -135,15 +148,39 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/photo-summer.jpeg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">归档</span>
+            <span id="subtitle">让浏览器缓存静态资源</span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-22 09:48" pubdate>
+          2024年10月22日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+  </div>
+
 
         
       </div>
@@ -159,46 +196,112 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 2 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2024</p>
-    
-    <a href="/2024/10/22/aliyun-oss-config-cache/" class="list-group-item list-group-item-action">
-      <time>10-22</time>
-      <div class="list-group-item-title">让浏览器缓存静态资源</div>
-    </a>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">让浏览器缓存静态资源</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>最近在做一些优化的时候，发现浏览器每次都重新请求静态资源</p>
+<span id="more"></span>
+
+<p>我们的图片、js、css等都存储在阿里云oss上；这些静态资源不会经常变动但每次浏览器刷新都会重新请求资源，造成流量的浪费、拖慢页面加载速度影响用户体验<br>故我们通过设置文件的http头部来让浏览器缓存这些资源</p>
+<h3 id="cache-control"><a href="#cache-control" class="headerlink" title="cache-control"></a>cache-control</h3><p>影响浏览器缓存资源的是http协议中的 <code>cache-control</code>参数</p>
+<p>Cache-Control 头部可以控制文件在客户端缓存的时长。例如：</p>
+<p>Cache-Control: max-age&#x3D;31536000: 设置文件缓存的有效期为一年（31536000 秒）。<br>Cache-Control: no-cache: 禁止缓存。<br>Cache-Control: no-store: 不允许缓存该文件。</p>
+<p><img src="/img/cache.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>1, 如果设置过cache-control后在开发者工具中查看发现没有走缓存<br>答: chrome浏览器在打开开发者工具时会默认禁用缓存</p>
+
+<p><img src="/img/dev-tool.png" srcset="/img/loading.gif" lazyload></p>
+<p>2，阿里云oss设置步骤<br>答: 登录阿里云OSS管理控制台–找到要设置缓存的文件–设置文件元数据</p>
+<p>3，新增数据每次都要重复设置吗<br>答: 在上传时配置文件元数据指定cache-control</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
   
-    
-    <a href="/2024/09/26/PHP%E4%BD%BF%E7%94%A8imap%E5%A4%84%E7%90%86%E9%82%AE%E4%BB%B6/" class="list-group-item list-group-item-action">
-      <time>09-26</time>
-      <div class="list-group-item-title">PHP使用imap处理邮件</div>
-    </a>
   
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/26/PHP%E4%BD%BF%E7%94%A8imap%E5%A4%84%E7%90%86%E9%82%AE%E4%BB%B6/" title="PHP使用imap处理邮件">
+                        <span class="hidden-mobile">PHP使用imap处理邮件</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
 </div>
 
 
 
 
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -276,6 +379,59 @@
 
 
 
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
 
