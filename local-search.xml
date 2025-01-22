@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>content-security-policy</title>
+    <link href="/2025/01/22/content-security-policy/"/>
+    <url>/2025/01/22/content-security-policy/</url>
+    
+    <content type="html"><![CDATA[<p>Content-Security-Policy 简称CSP，内容安全策略</p><span id="more"></span><p>Content-Security-Policy 简称CSP，内容安全策略；了解到该内容还是因为近期网上说B站开发者引入自己服务器的js攻击特定用户<br>除了代码review,也可以通过一定的配置来避免此类事情</p><p>CSP就是在响应header中或者网页meta元素中告诉浏览器应该加载哪些域或路径的资源；从而保证只加载可信任的资源</p><h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml">header(&quot;Content-Security-Policy: default-src &#x27;self&#x27;&quot;);<br>return &#x27;<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://www.baidu.com/test.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>hello world<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>&#x27;;<br><br></code></pre></td></tr></table></figure><p><img src="/img/csp_index.png"></p><p><img src="/img/csp_block.png"></p><p>由于浏览器在加载主页面的时候告诉浏览器是只允许加载同域名下的资源，所以页面中引用百度的资源是无法加载的<br>这样可以有效的避免跨站脚本攻击</p><h3 id="更多用法参考"><a href="#更多用法参考" class="headerlink" title="更多用法参考"></a>更多用法参考</h3><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>让浏览器缓存静态资源</title>
     <link href="/2024/10/22/aliyun-oss-config-cache/"/>
     <url>/2024/10/22/aliyun-oss-config-cache/</url>

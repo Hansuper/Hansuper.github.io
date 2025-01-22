@@ -19,21 +19,34 @@
   <meta name="author" content="Harrod">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="https://hansuperxu.github.io/archives/2024/10/index.html">
+    <meta name="description" content="Content-Security-Policy 简称CSP，内容安全策略">
+<meta property="og:type" content="article">
+<meta property="og:title" content="content-security-policy">
+<meta property="og:url" content="https://hansuperxu.github.io/2025/01/22/content-security-policy/index.html">
 <meta property="og:site_name" content="浮沉">
+<meta property="og:description" content="Content-Security-Policy 简称CSP，内容安全策略">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hansuperxu.github.io/img/csp_index.png">
+<meta property="og:image" content="https://hansuperxu.github.io/img/csp_block.png">
+<meta property="article:published_time" content="2025-01-22T07:42:28.000Z">
+<meta property="article:modified_time" content="2025-01-22T08:21:02.101Z">
 <meta property="article:author" content="Harrod">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hansuperxu.github.io/img/csp_index.png">
   
   
   
-  <title>归档 - 浮沉</title>
+  <title>content-security-policy - 浮沉</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -83,7 +96,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -135,15 +148,39 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/photo-summer.jpeg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">归档</span>
+            <span id="subtitle">content-security-policy</span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-01-22 15:42" pubdate>
+          2025年1月22日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+
+    
+
+    
+    
+  </div>
+
 
         
       </div>
@@ -159,40 +196,110 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 3 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2024</p>
-    
-    <a href="/2024/10/22/aliyun-oss-config-cache/" class="list-group-item list-group-item-action">
-      <time>10-22</time>
-      <div class="list-group-item-title">让浏览器缓存静态资源</div>
-    </a>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">content-security-policy</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Content-Security-Policy 简称CSP，内容安全策略</p>
+<span id="more"></span>
+
+<p>Content-Security-Policy 简称CSP，内容安全策略；了解到该内容还是因为近期网上说B站开发者引入自己服务器的js攻击特定用户<br>除了代码review,也可以通过一定的配置来避免此类事情</p>
+<p>CSP就是在响应header中或者网页meta元素中告诉浏览器应该加载哪些域或路径的资源；从而保证只加载可信任的资源</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml">header(&quot;Content-Security-Policy: default-src &#x27;self&#x27;&quot;);<br>return &#x27;<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://www.baidu.com/test.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>hello world<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>&#x27;;<br><br></code></pre></td></tr></table></figure>
+
+<p><img src="/img/csp_index.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/img/csp_block.png" srcset="/img/loading.gif" lazyload></p>
+<p>由于浏览器在加载主页面的时候告诉浏览器是只允许加载同域名下的资源，所以页面中引用百度的资源是无法加载的<br>这样可以有效的避免跨站脚本攻击</p>
+<h3 id="更多用法参考"><a href="#更多用法参考" class="headerlink" title="更多用法参考"></a>更多用法参考</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
   
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/10/22/aliyun-oss-config-cache/" title="让浏览器缓存静态资源">
+                        <span class="hidden-mobile">让浏览器缓存静态资源</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+  </div>
 </div>
 
 
 
 
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -270,6 +377,59 @@
 
 
 
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
 
