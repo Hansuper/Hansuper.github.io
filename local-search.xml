@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>charles https</title>
+    <link href="/2025/04/24/charles-https/"/>
+    <url>/2025/04/24/charles-https/</url>
+    
+    <content type="html"><![CDATA[<p>charles抓包https时遇到的问题</p><span id="more"></span><p>在使用charles抓包https时，尽管在证书配置完成后，在抓shopify网站的时候却发现无法抓取；可是连google和自建的网站都可以正确抓取，为什么shopify的不行呢？</p><p>在抓取时提示</p><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">handshake_failure (<span class="hljs-number">40</span>) - Unable <span class="hljs-keyword">to</span> negotiate an acceptable <span class="hljs-keyword">set</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">security</span> parameters, this probably means there are <span class="hljs-keyword">no</span> cipher suites <span class="hljs-keyword">in</span> common<br></code></pre></td></tr></table></figure><p>导致页面无法正常加载、或提示其它证书不正确等信息</p><p>这是因为shopify是采用http2协议和更安全的证书策略，Charles对http2协议支持不是很好</p><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>1，临时禁用chrome http2请求<br>在windows中，桌面找到chrome右键属性–快捷方式–目标；在引号后边追加 –disable-http2 重启chrome发现所有请求都使用http1.1访问</p><p>2，使用proxyman来代理charles抓包</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>content-security-policy</title>
     <link href="/2025/01/22/content-security-policy/"/>
     <url>/2025/01/22/content-security-policy/</url>
